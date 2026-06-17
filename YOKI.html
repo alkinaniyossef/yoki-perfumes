@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YOKI | عطر فاخر</title>
+
+  <style>
+    /* تحسين التمرير السلس للموقع بالكامل */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Tahoma", Arial, sans-serif;
+    }
+
+    body {
+      background: #0d0b09; /* لون داكن مستوحى من خلفية صورتك الفخمة */
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    :root {
+      --gold: #d6a84f;
+      --copper: #b87333;
+      --dark: #0d0b09;
+      --white: #f5f5f5;
+      --muted: #b8b8b8;
+    }
+
+    .container {
+      width: min(1150px, 90%);
+      margin: auto;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 20px 0;
+      background: rgba(13, 11, 9, 0.75);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(214, 168, 79, 0.15);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+      color: var(--gold);
+      letter-spacing: 1px;
+    }
+
+    .nav-cta {
+      color: #000;
+      background: var(--gold);
+      text-decoration: none;
+      padding: 10px 22px;
+      border-radius: 30px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-3px);
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 120px;
+      padding-bottom: 60px;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(214, 168, 79, 0.12), transparent 30%),
+        radial-gradient(circle at 80% 70%, rgba(184, 115, 51, 0.15), transparent 35%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .hero-content {
+      animation: fadeUp 1s ease forwards;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 8px 18px;
+      border: 1px solid rgba(214, 168, 79, 0.5);
+      border-radius: 30px;
+      color: var(--gold);
+      margin-bottom: 25px;
+      background: rgba(214, 168, 79, 0.08);
+    }
+
+    h1 {
+      font-size: clamp(36px, 5vw, 68px);
+      line-height: 1.2;
+      margin-bottom: 25px;
+    }
+
+    h1 span {
+      color: var(--gold);
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 620px;
+      margin-bottom: 35px;
+    }
+
+    .cta {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--gold), var(--copper));
+      color: #000;
+      text-decoration: none;
+      padding: 16px 38px;
+      border-radius: 40px;
+      font-size: 18px;
+      font-weight: bold;
+      transition: 0.35s;
+    }
+
+    .cta:hover {
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 0 35px rgba(214, 168, 79, 0.45);
+    }
+
+    /* حاوية مخصصة لعرض صورتك الجديدة بشكل فخم وثابت */
+    .product-image-container {
+      width: 100%;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(214, 168, 79, 0.2);
+      box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .product-image-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    section {
+      padding: 100px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 55px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(32px, 4vw, 48px);
+      margin-bottom: 15px;
+      color: var(--gold);
+    }
+
+    .section-title p {
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .feature {
+      padding: 35px;
+      border-radius: 28px;
+      background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+      border: 1px solid rgba(214, 168, 79, 0.18);
+      transition: 0.35s;
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    .feature.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .feature:hover {
+      transform: translateY(-8px);
+      border-color: rgba(214, 168, 79, 0.5);
+      box-shadow: 0 20px 45px rgba(0,0,0,0.35);
+    }
+
+    .icon {
+      font-size: 42px;
+      margin-bottom: 18px;
+    }
+
+    .feature h3 {
+      color: var(--gold);
+      margin-bottom: 14px;
+      font-size: 24px;
+    }
+
+    .feature p {
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .order {
+      background:
+        radial-gradient(circle at center, rgba(214,168,79,0.08), transparent 35%),
+        #0d0b09;
+    }
+
+    .form-box {
+      max-width: 650px;
+      margin: auto;
+      background: linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.01));
+      border: 1px solid rgba(214, 168, 79, 0.25);
+      border-radius: 35px;
+      padding: 40px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.45);
+    }
+
+    .form-group {
+      margin-bottom: 22px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--gold);
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.05);
+      color: #fff;
+      font-size: 16px;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    input:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 20px rgba(214,168,79,0.18);
+    }
+
+    button {
+      width: 100%;
+      padding: 17px;
+      border: none;
+      border-radius: 35px;
+      background: linear-gradient(135deg, var(--gold), var(--copper));
+      color: #000;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 30px rgba(214,168,79,0.4);
+    }
+
+    .success {
+      display: none;
+      margin-top: 20px;
+      padding: 16px;
+      border-radius: 16px;
+      background: rgba(214,168,79,0.12);
+      border: 1px solid rgba(214,168,79,0.35);
+      color: var(--gold);
+      text-align: center;
+      animation: fadeUp 0.5s ease;
+    }
+
+    footer {
+      padding: 30px;
+      text-align: center;
+      color: var(--muted);
+      border-top: 1px solid rgba(214,168,79,0.12);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(35px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    @media (max-width: 850px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 50px;
+      }
+
+      .hero p {
+        margin-inline: auto;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-box {
+        padding: 28px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">YOKI PERFUME</div>
+        <a href="#order" class="nav-cta">اطلب الآن</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- قسم الـ Hero يجمع بين النص التسويقي والأزرار مع صورتك الجديدة الفخمة جنب بعض -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <span class="badge">عطر فاخر بإصدار محدود</span>
+          <h1>سحر وجمال عطر YOKI<br><span>بلمسة لا تُنسى</span></h1>
+          <p>
+            مزيج ساحر من الكرز الأسود، الفانيليا المخملية، والأخشاب الدافئة. 
+            عطر داكن وجذاب يمنحك حضوراً راقياً وثابتاً يعبر عن شخصيتك الفريدة.
+          </p>
+          <a href="#order" class="cta">اطلب الآن</a>
+        </div>
+
+        <!-- هنا تم دمج صورتك الجديدة بنجاح -->
+        <div class="product-image-container">
+          <img src="yoki.png" alt="عطر يوكي الفاخر" />
+        </div>
+      </div>
+    </section>
+
+    <!-- قسم المواصفات والمكونات مكتوب برمجياً وتفاعلي مع السكرول -->
+    <section class="features">
+      <div class="container">
+        <div class="section-title">
+          <h2>مكونات العطر</h2>
+          <p>تركيبة متوازنة ومدروسة بين الجرأة والنعومة والدفء</p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature">
+            <div class="icon">🍒</div>
+            <h3>القمة العطرية</h3>
+            <p>افتتاحية غنية بنوتات الكرز الأسود تعطي لمسة فاكهية جذابة من أول رشة.</p>
+          </div>
+
+          <div class="feature">
+            <div class="icon">🤍</div>
+            <h3>قلب العطر</h3>
+            <p>فانيليا ناعمة ومخملية تضيف عمقاً دافئاً وتمنح العطر طابعاً حسياً مميزاً.</p>
+          </div>
+
+          <div class="feature">
+            <div class="icon">🌲</div>
+            <h3>القاعدة العطرية</h3>
+            <p>الأخشاب الدافئة الفاخرة لتضمن لك أعلى درجات الثبات والأناقة طوال اليوم.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- قسم نموذج الطلب التفاعلي -->
+    <section class="order" id="order">
+      <div class="container">
+        <div class="section-title">
+          <h2>احصل على زجاجتك الآن</h2>
+          <p>املأ بياناتك أدناه وسيتم التواصل معك فوراً لشحن وتوصيل طلبك</p>
+        </div>
+
+        <form class="form-box" id="orderForm">
+          <div class="form-group">
+            <label for="name">الاسم الكريم</label>
+            <input type="text" id="name" placeholder="اكتب اسمك الثلاثي" required />
+          </div>
+
+          <div class="form-group">
+            <label for="phone">رقم الجوال</label>
+            <input type="tel" id="phone" placeholder="05XXXXXXXX" required />
+          </div>
+
+          <div class="form-group">
+            <label for="city">المدينة</label>
+            <input type="text" id="city" placeholder="مثال: جدة" required />
+          </div>
+
+          <button type="submit">تأكيد طلب العطر</button>
+
+          <div class="success" id="successMessage">
+            تم استلام طلبك لعطر YOKI بنجاح. سيتم التواصل معك قريباً للتأكيد.
+          </div>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    © 2026 YOKI PERFUME — Luxury Perfume Landing Page
+  </footer>
+
+  <script>
+    // جافا سكربت لإظهار المكونات بالتدريج عند النزول بالصفحة
+    const features = document.querySelectorAll(".feature");
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add("show");
+          }, index * 150);
+        }
+      });
+    }, {
+      threshold: 0.2
+    });
+
+    features.forEach(feature => observer.observe(feature));
+
+    // جافا سكربت لإرسال وتأكيد الفورم
+    const form = document.getElementById("orderForm");
+    const successMessage = document.getElementById("successMessage");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const button = form.querySelector("button");
+      button.textContent = "جاري إرسال الطلب...";
+      button.disabled = true;
+
+      setTimeout(() => {
+        successMessage.style.display = "block";
+        button.textContent = "تم الطلب بنجاح!";
+        form.reset();
+
+        setTimeout(() => {
+          button.textContent = "تأكيد طلب العطر";
+          button.disabled = false;
+        }, 2500);
+      }, 900);
+    });
+  </script>
+
+</body>
+</html>
